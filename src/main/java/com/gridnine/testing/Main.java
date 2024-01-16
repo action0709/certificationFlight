@@ -12,10 +12,10 @@ public class Main {
         List<Flight> flightList=flightBuilder.createFlights();
         FilterSegment filterSegment = new FilterSegmentImpl();
         filterSegment.printListFlight(flightList);
-        System.out.println("\n1. Вылет до текущего момента времени:");
+        System.out.println("\n1. Без вылетов до текущего момента времени:");
         System.out.println("_______________________________________");
         filterSegment.getDepartureBeforeCurrentTime(flightList);
-        System.out.println("\n2. Сегменты с датой прилёта раньше даты вылета.:");
+        System.out.println("\n2. Без сегментов с датой прилёта раньше даты вылета.:");
         System.out.println("_______________________________________");
         filterSegment.getArrivalDateEarlierDepartureDate(flightList);
     }

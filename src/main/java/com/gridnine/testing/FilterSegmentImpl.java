@@ -30,7 +30,7 @@ public class FilterSegmentImpl implements FilterSegment {
                 Segment segment=flight.getSegments().get(0);
                 LocalDateTime departureTime = (segment.getDepartureDate());
                 LocalDateTime arrivalTime = (segment.getArrivalDate());
-                if (departureTime.isBefore(timeActual)) {
+                if (departureTime.isAfter(timeActual)) {
                    printFlight (flight,departureTime,arrivalTime);
                     resultFlight.add(flight);
                 }
@@ -40,19 +40,26 @@ public class FilterSegmentImpl implements FilterSegment {
     }
     public Set<Flight> getArrivalDateEarlierDepartureDate (List<Flight> flights) {
         Set<Flight> resultFlight = new HashSet<>();
-        List<Segment> segments = new ArrayList<>();
         for (Flight flight : flights) {
-            segments.addAll(flight.getSegments());
-                LocalDateTime departureTime = segments.get(0).getDepartureDate();
-                LocalDateTime arrivalTime = segments.remove(0).getArrivalDate();
-                if (arrivalTime.isBefore(departureTime)) {
-                    printFlight(flight, departureTime, arrivalTime);
-                    resultFlight.add(flight);
+            List<Segment> segments = flight.getSegments();
+            boolean flightMatch = true;
+            for (Segment segment : segments) {
+                LocalDateTime departureTime = segment.getDepartureDate();
+                LocalDateTime arrivalTime = segment.getArrivalDate();
+                if (arrivalTime.isAfter(departureTime)) {
+                    flightMatch = true;
+                   break;
                 }
             }
-
+            if (flightMatch){
+                resultFlight.add(flight);
+               }
+        }
+        printSetFlight(resultFlight);
         return resultFlight;
     }
+
+
 
     private void printFlight(Flight flight, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         /*DateTimeFormatter dateTimeFormatter = getDateFormatter();*/
@@ -62,6 +69,17 @@ public class FilterSegmentImpl implements FilterSegment {
         System.out.println("___________________________________________________");
 
     }
+    public void printSetFlight(Set<Flight> flights) {
+        for (Flight flight : flights) {
+            System.out.println("Рейс - " + flight.getId());
+            for (int i = 0; i < flight.getSegments().size(); i++) {
+                System.out.println(flight.getSegments().get(i)
+                        + " Сегмент -"
+                        + flight.getSegments().get(i).getId());
+            }
+        }
+    }
+
 }
 
 

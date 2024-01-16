@@ -10,5 +10,6 @@ public interface FilterSegment {
     List<Flight> getDepartureBeforeCurrentTime(List<Flight> flights);
 
     Set<Flight> getArrivalDateEarlierDepartureDate(List<Flight> flights);
+    void printSetFlight(Set<Flight> flights);
 
 }
