@@ -75,7 +75,6 @@ public class FilterSegmentImpl implements FilterSegment {
                 }
             }else {resultFlight.add(flight);}
         }
-
         printSetFlight(resultFlight);
         return resultFlight;
     }
