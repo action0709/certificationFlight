@@ -1,5 +1,6 @@
 package com.gridnine.testing;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -62,19 +63,22 @@ public class FilterSegmentImpl implements FilterSegment {
         Set<Flight> resultFlight = new HashSet<>();
         for (Flight flight : flights) {
             List<Segment> segments = flight.getSegments();
-            if (segments.size() > 2) {
-                    LocalDateTime arrivalTime = segments.remove(1).getArrivalDate();
-                    LocalDateTime departureTime = segments.remove(1).getDepartureDate();
-                    if (departureTime.isAfter(arrivalTime.plusHours(2))) {
-                         resultFlight.add(flight);
+            if (segments.size() > 1) {
+                for (int i = 0; i < segments.size() - 1; i++) {
+                    LocalDateTime arrivalTime = segments.get(i).getArrivalDate();
+                    LocalDateTime departureTime = segments.get(i + 1).getDepartureDate();
+                    Duration duration = Duration.between(arrivalTime, departureTime);
+                    if (duration.toHours() <= 2) {
+                        resultFlight.add(flight);
+                        break;
                     }
                 }
-            }
+            }else {resultFlight.add(flight);}
+        }
+
         printSetFlight(resultFlight);
         return resultFlight;
     }
-
-
 
     private void printFlight(Flight flight, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         /*DateTimeFormatter dateTimeFormatter = getDateFormatter();*/
