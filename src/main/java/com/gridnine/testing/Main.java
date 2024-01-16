@@ -15,8 +15,11 @@ public class Main {
         System.out.println("\n1. Без вылетов до текущего момента времени:");
         System.out.println("_______________________________________");
         filterSegment.getDepartureBeforeCurrentTime(flightList);
-        System.out.println("\n2. Без сегментов с датой прилёта раньше даты вылета.:");
+        System.out.println("\n2. Без сегментов с датой прилёта раньше даты вылета:");
         System.out.println("_______________________________________");
         filterSegment.getArrivalDateEarlierDepartureDate(flightList);
+        System.out.println("\n3. Без перелетов, где общее время, проведённое на земле, превышает два часа:");
+        System.out.println("_______________________________________");
+        filterSegment.getTimeOnEarthIsMoreTwoHours(flightList);
     }
 }

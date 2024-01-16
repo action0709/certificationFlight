@@ -58,6 +58,21 @@ public class FilterSegmentImpl implements FilterSegment {
         printSetFlight(resultFlight);
         return resultFlight;
     }
+    public Set<Flight> getTimeOnEarthIsMoreTwoHours (List<Flight> flights) {
+        Set<Flight> resultFlight = new HashSet<>();
+        for (Flight flight : flights) {
+            List<Segment> segments = flight.getSegments();
+            if (segments.size() > 2) {
+                    LocalDateTime arrivalTime = segments.remove(1).getArrivalDate();
+                    LocalDateTime departureTime = segments.remove(1).getDepartureDate();
+                    if (departureTime.isAfter(arrivalTime.plusHours(2))) {
+                         resultFlight.add(flight);
+                    }
+                }
+            }
+        printSetFlight(resultFlight);
+        return resultFlight;
+    }
 
 
 
