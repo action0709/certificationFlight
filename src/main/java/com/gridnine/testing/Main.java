@@ -14,6 +14,9 @@ public class Main {
         filterSegment.printListFlight(flightList);
         System.out.println("\n1. Вылет до текущего момента времени:");
         System.out.println("_______________________________________");
-        filterSegment.GetDepartureBeforeCurrentTime(flightList);
+        filterSegment.getDepartureBeforeCurrentTime(flightList);
+        System.out.println("\n2. Сегменты с датой прилёта раньше даты вылета.:");
+        System.out.println("_______________________________________");
+        filterSegment.getArrivalDateEarlierDepartureDate(flightList);
     }
 }

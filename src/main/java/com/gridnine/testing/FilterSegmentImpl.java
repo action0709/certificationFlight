@@ -22,26 +22,35 @@ public class FilterSegmentImpl implements FilterSegment {
         }
     }
 
-
-
-    public Set<Flight> GetDepartureBeforeCurrentTime (List<Flight> flights){
+    public List<Flight> getDepartureBeforeCurrentTime (List<Flight> flights){
 
     LocalDateTime timeActual = LocalDateTime.now();
-    Set<Flight> resultFlight = new HashSet<>();
-    List<Segment> segments = new ArrayList<>();
-        for (Flight flight : flights) {
-            segments.addAll(flight.getSegments());
-
-            while (segments.size() > 0) {
-                LocalDateTime departureTime = (segments.get(0).getDepartureDate());
-                LocalDateTime arrivalTime = (segments.remove(0).getArrivalDate());
-                if (departureTime.isAfter(timeActual)) {
+    List<Flight> resultFlight = new ArrayList<>();
+            for (Flight flight : flights) {
+                Segment segment=flight.getSegments().get(0);
+                LocalDateTime departureTime = (segment.getDepartureDate());
+                LocalDateTime arrivalTime = (segment.getArrivalDate());
+                if (departureTime.isBefore(timeActual)) {
                    printFlight (flight,departureTime,arrivalTime);
                     resultFlight.add(flight);
                 }
             }
 
-        }
+        return resultFlight;
+    }
+    public Set<Flight> getArrivalDateEarlierDepartureDate (List<Flight> flights) {
+        Set<Flight> resultFlight = new HashSet<>();
+        List<Segment> segments = new ArrayList<>();
+        for (Flight flight : flights) {
+            segments.addAll(flight.getSegments());
+                LocalDateTime departureTime = segments.get(0).getDepartureDate();
+                LocalDateTime arrivalTime = segments.remove(0).getArrivalDate();
+                if (arrivalTime.isBefore(departureTime)) {
+                    printFlight(flight, departureTime, arrivalTime);
+                    resultFlight.add(flight);
+                }
+            }
+
         return resultFlight;
     }
 
