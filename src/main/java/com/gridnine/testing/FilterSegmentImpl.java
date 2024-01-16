@@ -46,8 +46,8 @@ public class FilterSegmentImpl implements FilterSegment {
             for (Segment segment : segments) {
                 LocalDateTime departureTime = segment.getDepartureDate();
                 LocalDateTime arrivalTime = segment.getArrivalDate();
-                if (arrivalTime.isAfter(departureTime)) {
-                    flightMatch = true;
+                if (arrivalTime.isBefore(departureTime)) {
+                    flightMatch = false;
                    break;
                 }
             }
