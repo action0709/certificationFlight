@@ -66,33 +66,29 @@ public class FilterSegmentImplTest {
 
         Flight flight1 = mock(Flight.class);
         Segment segment1 = mock(Segment.class);
-        when(segment1.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(3));
-        when(segment1.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(8));
+        when(segment1.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(3));
+        when(segment1.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(8));
         Segment segment2 = mock(Segment.class);
-        when(segment2.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(9));
-        when(segment2.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(12));
+        when(segment2.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(9));
+        when(segment2.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(12));
         when(flight1.getSegments()).thenReturn(Arrays.asList(segment1,segment2));
 
         Flight flight2 = mock(Flight.class);
         Segment segment3 = mock(Segment.class);
-        when(segment3.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(1));
-        when(segment3.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(5));
+        when(segment3.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(1));
+        when(segment3.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(5));
         Segment segment4 = mock(Segment.class);
-        when(segment4.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(9));
-        when(segment4.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(12));
+        when(segment4.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(9));
+        when(segment4.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(12));
         when(flight2.getSegments()).thenReturn(Arrays.asList(segment3,segment4));
-        // Создаем объект FilterSegmentImpl
         FilterSegmentImpl filterSegment = new FilterSegmentImpl();
 
-        // Вызываем метод, который мы хотим протестировать
         Set<Flight> resultFlights = filterSegment.getTimeOnEarthIsMoreTwoHours(Arrays.asList(flight1, flight2));
 
-        // Проверяем, что метод вернул корректный результат
-        assertEquals(1, resultFlights.size()); // Должно быть два рейса с временем на земле более двух часов
+        assertEquals(1, resultFlights.size());
 
-        // Проверяем, что для каждого рейса вызывался метод printSetFlight
-        for (Flight flight : resultFlights) {
-            assertEquals(flight.getSegments().size(), 1);
+         for (Flight flight : resultFlights) {
+            assertEquals(flight.getSegments().size(), 2);
         }
     }
 }
