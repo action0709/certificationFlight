@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 /**
  * Bean that represents a flight.
  */
-class Flight {
+public class Flight {
 
     private final Integer id;
     private final List<Segment> segments;
@@ -23,6 +23,8 @@ class Flight {
     List<Segment> getSegments() {
         return segments;
     }
+
+
 
     @Override
     public String toString() {

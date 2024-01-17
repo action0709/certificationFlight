@@ -7,7 +7,7 @@ import java.util.Set;
 public interface FilterSegment {
     void printListFlight(List<Flight> flights);
 
-    List<Flight> getDepartureBeforeCurrentTime(List<Flight> flights);
+    List<Flight> getDepartureAfterCurrentTime(List<Flight> flights);
 
     Set<Flight> getArrivalDateEarlierDepartureDate(List<Flight> flights);
 

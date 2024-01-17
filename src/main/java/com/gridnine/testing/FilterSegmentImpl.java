@@ -23,7 +23,7 @@ public class FilterSegmentImpl implements FilterSegment {
         }
     }
 
-    public List<Flight> getDepartureBeforeCurrentTime (List<Flight> flights){
+    public List<Flight> getDepartureAfterCurrentTime (List<Flight> flights){
 
     LocalDateTime timeActual = LocalDateTime.now();
     List<Flight> resultFlight = new ArrayList<>();

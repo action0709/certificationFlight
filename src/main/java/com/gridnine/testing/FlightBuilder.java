@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Factory class to get sample list of flights.
  */
-class FlightBuilder {
+public class FlightBuilder {
    private Integer IdSegment = 0;
     private Integer IdFlight = 0;
 
