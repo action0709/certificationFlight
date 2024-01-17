@@ -24,10 +24,12 @@ public class SegmentTest {
         String expectedToString = '[' + departure.format(fmt) + '|' + arrival.format(fmt) + ']';
         assertEquals(expectedToString, segment.toString());
     }
+
     @Test(expected = NullPointerException.class)
     public void testSegmentConstructorWithNullDeparture() {
         new Segment(null, LocalDateTime.now(), 1);
     }
+
     @Test(expected = NullPointerException.class)
     public void testSegmentConstructorWithNullArrival() {
         new Segment(LocalDateTime.now(), null, 1);

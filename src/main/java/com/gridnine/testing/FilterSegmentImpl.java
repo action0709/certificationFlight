@@ -21,7 +21,6 @@ public class FilterSegmentImpl implements FilterSegment {
     }
 
     public List<Flight> getDepartureAfterCurrentTime(List<Flight> flights) {
-
         LocalDateTime timeActual = LocalDateTime.now();
         List<Flight> resultFlight = new ArrayList<>();
         for (Flight flight : flights) {
@@ -29,11 +28,11 @@ public class FilterSegmentImpl implements FilterSegment {
             LocalDateTime departureTime = (segment.getDepartureDate());
             LocalDateTime arrivalTime = (segment.getArrivalDate());
             if (departureTime.isAfter(timeActual)) {
-                printFlight(flight, departureTime, arrivalTime);
+
                 resultFlight.add(flight);
             }
         }
-
+        printFlight(resultFlight);
         return resultFlight;
     }
 
@@ -78,14 +77,6 @@ public class FilterSegmentImpl implements FilterSegment {
         }
         printFlight(resultFlight);
         return resultFlight;
-    }
-    private void printFlight(Flight flight, LocalDateTime departureTime, LocalDateTime arrivalTime) {
-        /*DateTimeFormatter dateTimeFormatter = getDateFormatter();*/
-        System.out.println("Рейс - " + flight.getId() + "\n" + "Время отправления: "
-                + departureTime + "\n" + "Время прибытия: "
-                + arrivalTime);
-        System.out.println("___________________________________________________");
-
     }
 }
 

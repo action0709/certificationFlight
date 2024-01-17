@@ -71,7 +71,7 @@ public class FilterSegmentImplTest {
         Segment segment2 = mock(Segment.class);
         when(segment2.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(9));
         when(segment2.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(12));
-        when(flight1.getSegments()).thenReturn(Arrays.asList(segment1,segment2));
+        when(flight1.getSegments()).thenReturn(Arrays.asList(segment1, segment2));
 
         Flight flight2 = mock(Flight.class);
         Segment segment3 = mock(Segment.class);
@@ -80,14 +80,14 @@ public class FilterSegmentImplTest {
         Segment segment4 = mock(Segment.class);
         when(segment4.getDepartureDate()).thenReturn(LocalDateTime.now().plusHours(9));
         when(segment4.getArrivalDate()).thenReturn(LocalDateTime.now().plusHours(12));
-        when(flight2.getSegments()).thenReturn(Arrays.asList(segment3,segment4));
+        when(flight2.getSegments()).thenReturn(Arrays.asList(segment3, segment4));
         FilterSegmentImpl filterSegment = new FilterSegmentImpl();
 
         Set<Flight> resultFlights = filterSegment.getTimeOnEarthIsMoreTwoHours(Arrays.asList(flight1, flight2));
 
         assertEquals(1, resultFlights.size());
 
-         for (Flight flight : resultFlights) {
+        for (Flight flight : resultFlights) {
             assertEquals(flight.getSegments().size(), 2);
         }
     }
