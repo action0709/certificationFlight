@@ -2,8 +2,15 @@ package com.gridnine.testing;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+/**
+ * The main class to demonstrate the functionality of the Flight and FilterSegment classes.
+ */
 public class Main {
+    /**
+     * The main method that creates flights, applies filters, and prints the results.
+     *
+     * @param args Command line arguments (not used in this application).
+     */
     public static void main(String[] args) {
 
         FlightBuilder flightBuilder = new FlightBuilder();
