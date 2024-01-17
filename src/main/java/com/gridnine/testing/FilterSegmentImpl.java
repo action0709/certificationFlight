@@ -3,16 +3,13 @@ package com.gridnine.testing;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class FilterSegmentImpl implements FilterSegment {
 
 
-    public void printListFlight(List<Flight> flights) {
+    public void printFlight(Collection<Flight> flights) {
         for (Flight flight : flights) {
             System.out.println("Рейс - " + flight.getId());
             for (int i = 0; i < flight.getSegments().size(); i++) {
@@ -23,23 +20,24 @@ public class FilterSegmentImpl implements FilterSegment {
         }
     }
 
-    public List<Flight> getDepartureAfterCurrentTime (List<Flight> flights){
+    public List<Flight> getDepartureAfterCurrentTime(List<Flight> flights) {
 
-    LocalDateTime timeActual = LocalDateTime.now();
-    List<Flight> resultFlight = new ArrayList<>();
-            for (Flight flight : flights) {
-                Segment segment=flight.getSegments().get(0);
-                LocalDateTime departureTime = (segment.getDepartureDate());
-                LocalDateTime arrivalTime = (segment.getArrivalDate());
-                if (departureTime.isAfter(timeActual)) {
-                   printFlight (flight,departureTime,arrivalTime);
-                    resultFlight.add(flight);
-                }
+        LocalDateTime timeActual = LocalDateTime.now();
+        List<Flight> resultFlight = new ArrayList<>();
+        for (Flight flight : flights) {
+            Segment segment = flight.getSegments().get(0);
+            LocalDateTime departureTime = (segment.getDepartureDate());
+            LocalDateTime arrivalTime = (segment.getArrivalDate());
+            if (departureTime.isAfter(timeActual)) {
+                printFlight(flight, departureTime, arrivalTime);
+                resultFlight.add(flight);
             }
+        }
 
         return resultFlight;
     }
-    public Set<Flight> getArrivalDateEarlierDepartureDate (List<Flight> flights) {
+
+    public Set<Flight> getArrivalDateEarlierDepartureDate(List<Flight> flights) {
         Set<Flight> resultFlight = new HashSet<>();
         for (Flight flight : flights) {
             List<Segment> segments = flight.getSegments();
@@ -49,17 +47,18 @@ public class FilterSegmentImpl implements FilterSegment {
                 LocalDateTime arrivalTime = segment.getArrivalDate();
                 if (arrivalTime.isBefore(departureTime)) {
                     flightMatch = false;
-                   break;
+                    break;
                 }
             }
-            if (flightMatch){
+            if (flightMatch) {
                 resultFlight.add(flight);
-               }
+            }
         }
-        printSetFlight(resultFlight);
+        printFlight(resultFlight);
         return resultFlight;
     }
-    public Set<Flight> getTimeOnEarthIsMoreTwoHours (List<Flight> flights) {
+
+    public Set<Flight> getTimeOnEarthIsMoreTwoHours(List<Flight> flights) {
         Set<Flight> resultFlight = new HashSet<>();
         for (Flight flight : flights) {
             List<Segment> segments = flight.getSegments();
@@ -73,31 +72,21 @@ public class FilterSegmentImpl implements FilterSegment {
                         break;
                     }
                 }
-            }else {resultFlight.add(flight);}
+            } else {
+                resultFlight.add(flight);
+            }
         }
-        printSetFlight(resultFlight);
+        printFlight(resultFlight);
         return resultFlight;
     }
-
     private void printFlight(Flight flight, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         /*DateTimeFormatter dateTimeFormatter = getDateFormatter();*/
         System.out.println("Рейс - " + flight.getId() + "\n" + "Время отправления: "
-                + departureTime+ "\n" + "Время прибытия: "
+                + departureTime + "\n" + "Время прибытия: "
                 + arrivalTime);
         System.out.println("___________________________________________________");
 
     }
-    public void printSetFlight(Set<Flight> flights) {
-        for (Flight flight : flights) {
-            System.out.println("Рейс - " + flight.getId());
-            for (int i = 0; i < flight.getSegments().size(); i++) {
-                System.out.println(flight.getSegments().get(i)
-                        + " Сегмент -"
-                        + flight.getSegments().get(i).getId());
-            }
-        }
-    }
-
 }
 
 

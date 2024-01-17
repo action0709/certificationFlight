@@ -14,7 +14,7 @@ public class Flight {
     Flight(final List<Segment> segs, Integer id) {
         this.id = id;
         segments = segs;
-            }
+    }
 
     public Integer getId() {
         return id;
@@ -23,8 +23,6 @@ public class Flight {
     List<Segment> getSegments() {
         return segments;
     }
-
-
 
     @Override
     public String toString() {

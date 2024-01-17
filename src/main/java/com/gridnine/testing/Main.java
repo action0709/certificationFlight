@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) {
 
         FlightBuilder flightBuilder = new FlightBuilder();
-        List<Flight> flightList=flightBuilder.createFlights();
+        List<Flight> flightList = flightBuilder.createFlights();
         FilterSegment filterSegment = new FilterSegmentImpl();
-        filterSegment.printListFlight(flightList);
+        filterSegment.printFlight(flightList);
         System.out.println("\n1. Без вылетов до текущего момента времени:");
         System.out.println("_______________________________________");
         filterSegment.getDepartureAfterCurrentTime(flightList);

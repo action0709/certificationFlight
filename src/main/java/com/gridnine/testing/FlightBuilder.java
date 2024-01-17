@@ -9,10 +9,10 @@ import java.util.List;
  * Factory class to get sample list of flights.
  */
 public class FlightBuilder {
-   private Integer IdSegment = 0;
+    private Integer IdSegment = 0;
     private Integer IdFlight = 0;
 
-   public  List<Flight> createFlights() {
+    public List<Flight> createFlights() {
         LocalDateTime threeDaysFromNow = LocalDateTime.now().plusDays(3);
         return Arrays.asList(
                 //A normal flight with two hour duration, Обычный рейс продолжительностью два часа
@@ -45,6 +45,6 @@ public class FlightBuilder {
             segments.add(new Segment(dates[i], dates[i + 1], IdSegment));
         }
         IdFlight += 1;
-        return new Flight(segments,IdFlight);
+        return new Flight(segments, IdFlight);
     }
 }
